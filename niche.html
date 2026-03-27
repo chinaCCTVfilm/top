@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>冷门高分电影推荐</title>
+<meta name="description" content="不为人知的高分电影推荐">
+<meta name="keywords" content="冷门电影,高分电影">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="layout">
+<div class="ad-left"></div>
+
+<div class="main">
+
+<div id="header"></div>
+
+<h1>🎬 冷门佳片推荐</h1>
+
+<div id="list" class="grid"></div>
+
+</div>
+
+<div class="ad-right"></div>
+</div>
+
+<script>
+fetch("header.html").then(r=>r.text()).then(d=>{
+header.innerHTML=d
+})
+</script>
+
+<script>
+const API="/api/tmdb"
+
+async function load(){
+
+const r=await fetch(`${API}?path=discover/movie?vote_average.gte=8&vote_count.gte=200`)
+const d=await r.json()
+
+let html=""
+
+d.results.forEach(m=>{
+if(!m.poster_path)return
+
+html+=`
+<div class="movie">
+<a href="movie.html?id=${m.id}">
+<img src="https://image.tmdb.org/t/p/w300${m.poster_path}">
+<p>${m.title}</p>
+</a>
+</div>`
+})
+
+list.innerHTML=html
+}
+
+load()
+</script>
+
+</body>
+</html>

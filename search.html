@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>搜索</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="layout">
+<div class="ad-left"></div>
+
+<div class="main">
+<div id="header"></div>
+
+<div class="container">
+<div id="list" class="grid"></div>
+</div>
+
+</div>
+
+<div class="ad-right"></div>
+</div>
+
+<script src="header.js"></script>
+
+<script>
+const q=new URL(location).searchParams.get("q")
+
+async function load(){
+const r=await fetch("/api/search?q="+q)
+const d=await r.json()
+
+let html=""
+d.results.forEach(m=>{
+if(!m.poster_path)return
+html+=`
+<div class="movie">
+<img src="https://image.tmdb.org/t/p/w300${m.poster_path}">
+<p>${m.title}</p>
+</div>`
+})
+
+document.getElementById("list").innerHTML=html
+}
+load()
+</script>
+
+</body>
+</html>

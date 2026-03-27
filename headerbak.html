@@ -1,0 +1,108 @@
+<div class="header-container">
+  <div class="header-top">
+    <div class="logo" onclick="goHome()">GoodFilm Pro</div>
+    <div class="search"><input id="searchInput" type="text" placeholder="搜索电影..."></div>
+  </div>
+
+  <div class="nav">
+    <div onclick="goHome()">首页</div>
+    <div class="dropdown">
+      <span>电影分类 ▼</span>
+      <div class="dropdown-content">
+        <div class="dropdown-group">
+          <div class="dropdown-row">
+            <span onclick="goCategory('action')">动作</span>
+            <span onclick="goCategory('comedy')">喜剧</span>
+            <span onclick="goCategory('drama')">剧情</span>
+            <span onclick="goCategory('horror')">恐怖</span>
+            <span onclick="goCategory('romance')">爱情</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <span>地区 ▼</span>
+      <div class="dropdown-content">
+        <div class="dropdown-row">
+          <span onclick="goRegion('US')">美国</span>
+          <span onclick="goRegion('GB')">英国</span>
+          <span onclick="goRegion('AU')">澳大利亚</span>
+          <span onclick="goRegion('CA')">加拿大</span>
+          <span onclick="goRegion('NZ')">新西兰</span>
+          <span onclick="goRegion('LU')">卢森堡</span>
+          <span onclick="goRegion('IE')">爱尔兰</span>
+          <span onclick="goRegion('CH')">瑞士</span>
+          <span onclick="goRegion('NO')">挪威</span>
+          <span onclick="goRegion('FR')">法国</span>
+          <span onclick="goRegion('DE')">德国</span>
+          <span onclick="goRegion('JP')">日本</span>
+          <span onclick="goRegion('KR')">韩国</span>
+          <span onclick="goRegion('SG')">新加坡</span>
+          <span onclick="goRegion('DK')">丹麦</span>
+          <span onclick="goRegion('IS')">冰岛</span>
+          <span onclick="goRegion('NL')">荷兰</span>
+          <span onclick="goRegion('SE')">瑞典</span>
+          <span onclick="goRegion('IN')">印度</span>
+          <span onclick="goRegion('CN')">中国</span>
+          <span onclick="goRegion('ID')">印度尼西亚</span>
+          <span onclick="goRegion('BR')">巴西</span>
+          <span onclick="goRegion('NG')">尼日利亚</span>
+          <span onclick="goRegion('RU')">俄罗斯</span>
+          <span onclick="goRegion('EG')">埃及</span>
+          <span onclick="goRegion('MX')">墨西哥</span>
+          <span onclick="goRegion('TR')">土耳其</span>
+          <span onclick="goRegion('PH')">菲律宾</span>
+          <span onclick="goRegion('VN')">越南</span>
+          <span onclick="goRegion('PK')">巴基斯坦</span>
+          <span onclick="goRegion('IT')">意大利</span>
+          <span onclick="goRegion('ZA')">南非</span>
+          <span onclick="goRegion('AR')">阿根廷</span>
+          <span onclick="goRegion('CL')">智利</span>
+          <span onclick="goRegion('UA')">乌克兰</span>
+          <span onclick="goRegion('IL')">以色列</span>
+          <span onclick="goRegion('')">其他</span>
+        </div>
+      </div>
+    </div>
+
+    <div onclick="goCategory('popular')">热门电影</div>
+    <div onclick="goCategory('top')">高分电影</div>
+    <div onclick="goCategory('horror')">胆小勿入</div>
+    <div onclick="goActors()">著名演员</div>
+    <div onclick="goSpecial('learn-english')">适合学英语电影</div>
+    <div onclick="goSpecial('animation')">动画片</div>
+  </div>
+</div>
+
+<script>
+function goHome(){ window.location.href="/"; }
+function goCategory(type){ window.location.href=`/category.html?type=${type}`; }
+function goSpecial(type){ window.location.href=`/category.html?type=${type}`; }
+function goRegion(code){ if(!code) window.location.href="/category.html"; else window.location.href=`/category.html?region=${code}&type=discover`; }
+function goActors(){ window.location.href="/actors.html"; }
+</script>
+
+<script>
+function goHome() {
+  window.location.href = "/";
+}
+
+function goCategory(type) {
+  window.location.href = `/category.html?type=${type}`;
+}
+
+function goRegion(code) {
+  window.location.href = `/category.html?region=${code}`;
+}
+
+function goActors() {
+  window.location.href = "/actors.html";
+}
+
+/* ✅ 关键：挂到全局 */
+window.goHome = goHome;
+window.goCategory = goCategory;
+window.goRegion = goRegion;
+window.goActors = goActors;
+</script>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>GoodFilm</title>
+
+  <script type="module">
+    import { initApp } from "/js/app.js";
+    initApp();
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      background: #e8f5e9;
+      font-family: Arial;
+    }
+
+    .ad {
+      width: 10%;
+      background: #c8e6c9;
+      text-align: center;
+      padding-top: 20px;
+    }
+
+    .main {
+      width: 80%;
+      padding: 10px;
+    }
+
+    #app {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    .nav {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="ad">广告</div>
+
+<div class="main">
+
+  <div class="nav">
+    <a href="/">首页</a>
+    <a href="/category">分类</a>
+    <a href="/search">搜索</a>
+  </div>
+
+  <div id="app"></div>
+
+</div>
+
+<div class="ad">广告</div>
+
+</body>
+</html>

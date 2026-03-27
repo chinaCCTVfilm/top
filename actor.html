@@ -1,0 +1,115 @@
+<!DOCTYPE html> <!-- HTML5 -->
+<html> <!-- 页面开始 -->
+<head>
+<meta charset="UTF-8"> <!-- 编码 -->
+<title>演员详情</title> <!-- 标题 -->
+<link rel="stylesheet" href="style.css"> <!-- 全局样式 -->
+
+<style>
+.actor{display:flex;gap:20px;padding:20px} /* 演员信息布局 */
+.actor img{width:300px;border-radius:10px} /* 头像 */
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px} /* 6列 */
+.movie img{width:100%;height:220px;object-fit:cover} /* 海报 */
+</style>
+
+</head>
+
+<body>
+
+<div class="layout"> <!-- 整体布局 -->
+
+<div class="ad-left"></div> <!-- 左广告 -->
+
+<div class="main"> <!-- 主体 -->
+
+<div id="header"></div> <!-- 头部 -->
+
+<div id="actor"></div> <!-- 演员信息 -->
+
+<h2>作品</h2> <!-- 标题 -->
+
+<div id="actor-movies" class="grid"></div> <!-- 作品列表 -->
+
+</div>
+
+<div class="ad-right"></div> <!-- 右广告 -->
+
+</div>
+
+<script src="header.js"></script> <!-- 加载header -->
+
+<script type="module">
+
+import { fetchAPI } from "./js/core/api.js"; // API封装
+import { renderMovies } from "./js/ui/render.js"; // 渲染
+
+let page = 1; // 当前页
+let loading = false; // 加载锁
+
+const id = new URL(location).searchParams.get("id"); // 获取演员ID
+
+// 初始化
+async function init(){
+
+  if(!id) return; // 无ID退出
+
+  await loadActorInfo(); // 加载演员信息
+
+  loadMovies(); // 加载作品
+
+  window.addEventListener("scroll", handleScroll); // 滚动监听
+}
+
+// 演员信息
+async function loadActorInfo(){
+
+  const info = await fetchAPI(`/api/tmdb?type=person&id=${id}`); // 新API
+
+  let html = `
+  <div class="actor">
+    <img src="https://image.tmdb.org/t/p/w500${info.profile_path}"> <!-- 头像 -->
+    <div>
+      <h2>${info.name}</h2> <!-- 名字 -->
+      <p>${info.biography || "暂无简介"}</p> <!-- 简介 -->
+    </div>
+  </div>
+  `;
+
+  document.getElementById("actor").innerHTML = html; // 插入
+}
+
+// 滚动
+function handleScroll(){
+  if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 200){
+    loadMovies(); // 加载更多
+  }
+}
+
+// 加载作品
+async function loadMovies(){
+
+  if(loading) return; // 防重复
+  loading = true;
+
+  const data = await fetchAPI(`/api/tmdb?type=person_movies&id=${id}&page=${page}`); // 新API
+
+  if(!data.cast || data.cast.length === 0){
+    loading = false;
+    return;
+  }
+
+  const container = document.getElementById("actor-movies"); // 容器
+
+  renderMovies(container, data.cast); // 渲染（复用统一卡片）
+
+  page++; // 页码++
+
+  loading = false; // 解锁
+}
+
+init(); // 启动
+
+</script>
+
+</body>
+</html>

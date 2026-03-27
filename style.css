@@ -1,0 +1,117 @@
+body { margin:0; font-family:Arial; background:#fff8dc; }
+.ad-left, .ad-right { width:10%; position:fixed; top:0; bottom:0; background:#fff8dc; z-index:1; }
+.ad-left { left:0; } .ad-right { right:0; }
+main, .header-container { width:79%; margin:0 auto; }
+
+.header-top { display:flex; justify-content:space-between; align-items:center; padding:10px 0; }
+.logo { font-size:22px; font-weight:bold; cursor:pointer; }
+.search input { padding:6px; width:200px; }
+.nav { display:flex; gap:20px; background:#fff; padding:10px; position:relative; z-index:10; }
+.nav > div { cursor:pointer; }
+.dropdown { position:relative; }
+.dropdown-content { display:none; position:absolute; top:100%; left:0; background:#fff; padding:10px; width:320px; flex-direction:column; box-shadow:0 2px 8px rgba(0,0,0,0.2); }
+.dropdown:hover .dropdown-content, .dropdown-content:hover { display:flex; }
+.dropdown-group { margin-bottom:8px; }
+.dropdown-row { display:flex; flex-wrap:wrap; gap:10px; }
+.dropdown-content span { cursor:pointer; padding:4px 6px; display:inline-block; }
+.dropdown-content span:hover { background-color:#f0f0f0; border-radius:4px; }
+
+/* 电影网格 */
+.movie-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:12px; width:100%; margin-top:10px; }
+.movie-card { background:#fff; border-radius:6px; overflow:hidden; cursor:pointer; display:flex; flex-direction:column; height:auto; }
+.movie-card img { width:100%; height:auto; object-fit:cover; display:block; }
+.movie-card p { font-size:14px; padding:6px; margin:0; text-align:center; height:40px; overflow:hidden; }
+
+/* ===== 顶部固定（关键需求4）===== */
+.header-container{
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: #fff8dc;
+}
+
+/* 导航鼠标手型 */
+.nav > div {
+  cursor: pointer;
+}
+
+/* dropdown 子项手型 */
+.dropdown-content span {
+  cursor: pointer;
+}
+
+/* hover 高亮 */
+.dropdown-content span:hover {
+  background:#eee;
+}
+
+/* ============================= */
+/* 导航栏系统 */
+/* ============================= */
+
+.nav {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  background: #a5d6a7;
+  font-weight: bold;
+}
+
+.nav a {
+  text-decoration: none;
+  color: black;
+}
+
+/* ============================= */
+/* 地区下拉 */
+/* ============================= */
+
+.dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  background: white;
+  border: 1px solid #ccc;
+  max-height: 300px;
+  overflow-y: auto;
+  width: 200px;
+  z-index: 1000;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 6px 10px;
+}
+
+.dropdown-menu a:hover {
+  background: #eee;
+}
+
+/* 广告系统 */
+
+.ad-box {
+  background: #dcedc8;
+  text-align: center;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.ad-inline {
+  grid-column: span 6;
+}
+
+/* 胆小勿入 */
+
+h1 {
+  font-size: 28px;
+}
+
+#niche-list {
+  margin-top: 20px;
+}

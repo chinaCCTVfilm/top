@@ -1,0 +1,6 @@
+name = "goodfilm-v93"
+main = "workers/index.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+TMDB_KEY = "替换成你的TMDB_API_KEY"
